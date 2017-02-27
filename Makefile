@@ -7,10 +7,10 @@ FS_MODULES=/usr/local/freeswitch/mod
 
 
 CC=gcc 
-CFLAGS=-fPIC -O3 -fomit-frame-pointer -fno-exceptions -Wall -pedantic
+CFLAGS=-fPIC -O3 -fomit-frame-pointer -fno-exceptions -Wall -std=c99 -pedantic
 
 INCLUDES=-I/usr/local/include -I$(FS_INCLUDES)
-LDFLAGS=-lm -Wl, -L/usr/local/lib -lzmq -L$(FS_LIB) -lfreeswitch -Wl 
+LDFLAGS=-lm -L/usr/local/lib -lzmq -L$(FS_LIB) -lfreeswitch
 
 all: mod_event_zeromq.o
 	$(CC) $(CFLAGS) $(INCLUDES) -shared -Xlinker -x -o mod_event_zeromq.so mod_event_zeromq.o $(LDFLAGS)
