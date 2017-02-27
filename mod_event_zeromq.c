@@ -1,8 +1,8 @@
 /* 
- * Version: MPL 1.1
+ * Version: MPL 2.0
  *
  * The contents of this file are subject to the Mozilla Public License Version
- * 1.1 (the "License"); you may not use this file except in compliance with
+ * 2.0 (the "License"); you may not use this file except in compliance with
  * the License. You may obtain a copy of the License at
  * http://www.mozilla.org/MPL/
  *
@@ -43,7 +43,7 @@ static struct {
 
 // ZeroMQ
 static void* run_flag;		// zmq_atomic_counter 
-static void* ctx_pub;	// zmq_ctx
+static void* ctx_pub;		// zmq_ctx
 static void* socket_publisher;
 
 static void free_message_data(void *data, void *hint) 
@@ -109,14 +109,14 @@ static switch_status_t config(void)
 SWITCH_MODULE_LOAD_FUNCTION(mod_event_zeromq_load)
 {
 	int major, minor, patch;
-    zmq_version (&major, &minor, &patch);
-    switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "ZeroMQ version is %d.%d.%d\n", major, minor, patch);
+	zmq_version (&major, &minor, &patch);
+	switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_INFO, "ZeroMQ version is %d.%d.%d\n", major, minor, patch);
 
-    // Load config XML
-    config();
+	// Load config XML
+	config();
 
 	// Set up the ØMQ 
-    ctx_pub = zmq_ctx_new();
+	ctx_pub = zmq_ctx_new();
 	socket_publisher = zmq_socket(ctx_pub, ZMQ_PUB);
 	
 	if( zmq_bind(socket_publisher, prefs.endpoint) != 0 ){
