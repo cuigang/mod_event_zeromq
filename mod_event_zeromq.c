@@ -62,7 +62,7 @@ static void event_handler(switch_event_t *event)
 	if(zmq_msg_init_data(&msg, pjson, strlen(pjson), free_message_data, NULL)==0){
 		// Send the message
 		zmq_msg_send(&msg, socket_publisher, 0);
-		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "ZeroMQ Event Handled.\n");
+		//switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_DEBUG, "ZeroMQ Event Handled.\n");
 	}else{
 		free_message_data(pjson, NULL);
 		switch_log_printf(SWITCH_CHANNEL_LOG, SWITCH_LOG_WARNING, "zmq_msg_init_data failed. Event message lost.\n");
